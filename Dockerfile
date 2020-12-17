@@ -16,6 +16,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
 VOLUME /var/lib/mysql
+VOLUME /etc/my.cnf.d
 EXPOSE 3306 4567 4444 4568
 
 # Overwrite default config and provide entrypoint

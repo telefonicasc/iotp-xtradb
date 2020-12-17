@@ -21,7 +21,14 @@ fi
 # Create config folder if not there
 mkdir -p /tmp/my.cnf.d
 for TEMPLATE in /etc/percona-xtradb-cluster.conf.d/*.template; do
-    envsubst < "$TEMPLATE" > /tmp/my.cnf.d/`basename -s .template "${TEMPLATE}"`
+    if [ -f "${TEMPLATE}" ]; then
+        envsubst < "$TEMPLATE" > /tmp/my.cnf.d/`basename -s .template "${TEMPLATE}"`
+    fi
+done
+for TEMPLATE in /etc/my.cnf.d/*.template; do
+    if [ -f "${TEMPLATE}" ]; then
+        envsubst < "$TEMPLATE" > /tmp/my.cnf.d/`basename -s .template "${TEMPLATE}"`
+    fi
 done
 
 # Now we can do the initialization.
@@ -35,9 +42,8 @@ GRANT PROCESS, RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'sstuser'@'%';
 FLUSH PRIVILEGES;
 EOF
     /usr/sbin/mysqld --basedir=/usr --initialize-insecure --init_file=/tmp/init_file.sql --datadir="${MYSQL_DATADIR}"
-    rm   /tmp/init_file.sql
+    rm -f /tmp/init_file.sql
 fi
 
 # Execute mysqld
 exec /usr/sbin/mysqld --basedir=/usr "$@"
-
