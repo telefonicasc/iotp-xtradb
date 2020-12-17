@@ -26,6 +26,7 @@ TCP Ports used by this image:
 - `MYSQL_STRICT_MODE`: Percona strict mode (default *ENFORCING*).
 - `MYSQL_PASSWORD`: Initial mysql root password (default *changeme*).
 - `MYSQL_SST_PASSWORD`: Initial password for SST (default *changeme*).
+- `MYSQL_EXPORTER_PASSWORD`: Initial password for prometheus exporter (default *changeme*).
 
 ### Logging
 
