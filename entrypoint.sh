@@ -13,8 +13,8 @@ fi
 export MYSQL_MUST_INIT=0
 if [ "${MYSQL_NODE_ID}" -eq "1" ]; then
     if ! [ -d "${MYSQL_DATADIR}/mysql" ]; then
-        MYSQL_MUST_INIT=1
-        MYSQL_CLUSTER_ADDRESS=""
+        export MYSQL_MUST_INIT=1
+        export MYSQL_CLUSTER_ADDRESS=""
     fi
 fi
 

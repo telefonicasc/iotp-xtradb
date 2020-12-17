@@ -26,8 +26,8 @@ innodb_autoinc_lock_mode=2
 # Cluster name
 wsrep_cluster_name=${MYSQL_CLUSTER_NAME}
 
-#If wsrep_node_name is not specified,  then system hostname will be used
-wsrep_node_name=${MYSQL_CLUSTER_NAME}-${MYSQL_NODE_ID}
+#If wsrep_node_name is not specified, then system hostname will be used
+wsrep_node_name=${MYSQL_CLUSTER_NAME}-node-${MYSQL_NODE_ID}
 
 #pxc_strict_mode allowed values: DISABLED,PERMISSIVE,ENFORCING,MASTER
 pxc_strict_mode=${MYSQL_STRICT_MODE}
