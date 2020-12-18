@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eoux pipefail
+set -eou pipefail
 
 # Load environment variables
 if [ -f /etc/sysconfig/mysql ]; then
