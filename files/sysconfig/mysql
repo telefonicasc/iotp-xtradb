@@ -1,0 +1,10 @@
+# Environment variables to control mysql behaviour
+
+export MYSQL_DATADIR="${MYSQL_DATADIR:-/var/lib/mysql}"
+export MYSQL_NODE_ID="${MYSQL_NODE_ID:-1}"
+export MYSQL_CLUSTER_ADDRESS="${MYSQL_CLUSTER_ADDRESS:-}"
+export MYSQL_CLUSTER_NAME="${MYSQL_CLUSTER_NAME:-pxc-cluster}"
+export MYSQL_STRICT_MODE="${MYSQL_STRICT_MODE:-ENFORCING}"
+export MYSQL_SST_PASSWORD="${MYSQL_SST_PASSWORD:-changeme}"
+export MYSQL_PASSWORD="${MYSQL_PASSWORD:-changeme}"
+

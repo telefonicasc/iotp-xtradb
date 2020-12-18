@@ -1,0 +1,19 @@
+# Template my.cnf for PXC
+# Edit to your requirements.
+[client]
+socket = /tmp/mysql.sock
+
+[mysqld]
+server-id           = ${MYSQL_NODE_ID}
+datadir             = ${MYSQL_DATADIR}
+socket              = /tmp/mysql.sock
+log_output          = FILE
+general_log_file    = /dev/stdout
+slow_query_log_file = /dev/stdout
+pid-file            = /tmp/mysqld.pid
+log-bin             = ${MYSQL_CLUSTER_NAME}-${MYSQL_NODE_ID}
+log_slave_updates
+#expire_logs_days    = 7
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links = 0
