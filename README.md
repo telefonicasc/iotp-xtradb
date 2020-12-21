@@ -21,6 +21,7 @@ TCP Ports used by this image:
 ### Environment:
 
 - `MYSQL_NODE_ID`: 1, 2, 3... (default *1*).
+- `MYSQL_DATADIR`: Path to the data folder (default */var/lib/mysql*).
 - `MYSQL_CLUSTER_ADDRESS`: Cluster addresses list for percona xtradb (e.g.: `server1,server2,server3`).
 - `MYSQL_CLUSTER_NAME`: Cluster name (default *pxc-cluster*).
 - `MYSQL_STRICT_MODE`: Percona strict mode (default *ENFORCING*).
@@ -47,6 +48,6 @@ slow_query_log = /var/log/slow_queries_node_${MYSQL_NODE_ID}
 
 ## Initialization
 
-If `MYSQL_NODE_ID` is *1* and `/var/lib/mysql` is empty (i.e. usually on first deployment of the first container in the statefulset), the entrypoint will create an empty database and set the proper `root` and `sstuser` passwords.
+If `MYSQL_NODE_ID` is *1* and `$MYSQL_DATADIR` (default */var/lib/mysql*) is empty (i.e. missing the `mysql`subfolder, on first deployment of the first container in the statefulset), the entrypoint will create an empty database and set the proper `root` and `sstuser` passwords.
 
 In any other case, the entrypoint will not attempt to init the database, in order to avoid possible information loss.

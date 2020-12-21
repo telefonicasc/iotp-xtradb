@@ -10,7 +10,7 @@ socket              = /tmp/mysql.sock
 log_output          = FILE
 general_log_file    = /dev/stdout
 slow_query_log_file = /dev/stdout
-pid-file            = /tmp/mysqld.pid
+pid-file            = ${MYSQL_DATADIR}/mysqld.pid
 log-bin             = ${MYSQL_CLUSTER_NAME}-${MYSQL_NODE_ID}
 log_slave_updates
 #expire_logs_days    = 7
