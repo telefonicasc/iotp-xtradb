@@ -51,3 +51,7 @@ slow_query_log = /var/log/slow_queries_node_${MYSQL_NODE_ID}
 If `MYSQL_NODE_ID` is *1* and `$MYSQL_DATADIR` (default */var/lib/mysql*) is empty (i.e. missing the `mysql`subfolder, on first deployment of the first container in the statefulset), the entrypoint will create an empty database and set the proper `root` and `sstuser` passwords.
 
 In any other case, the entrypoint will not attempt to init the database, in order to avoid possible information loss.
+
+## Backup
+
+This image includes the most recent version of [minio client]() at the time of build. `mc` is installed in `/usr/bin` and can be used to stream mysql dumps straight into minio backend storage.

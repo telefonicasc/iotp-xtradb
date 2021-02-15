@@ -3,7 +3,7 @@ FROM centos:centos7
 # Install Percona-release 5.7
 RUN yum install -y https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
     percona-release setup -y pxc-57 && \
-    yum install -y Percona-XtraDB-Cluster-server-57 gettext && \
+    yum install -y Percona-XtraDB-Cluster-server-57 wget gettext && \
     yum clean all && \
     rm -rf /var/cache/yum && \
     chmod -R a+rX /etc/my.cnf.d && \
@@ -14,6 +14,11 @@ RUN yum install -y https://repo.percona.com/yum/percona-release-latest.noarch.rp
 ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
+
+# Install minio client
+RUN cd /usr/bin && \
+    wget https://dl.min.io/client/mc/release/linux-amd64/mc && \
+    chmod 0755 mc
 
 VOLUME /var/lib/mysql
 VOLUME /etc/my.cnf.d
@@ -31,4 +36,3 @@ RUN  chmod -R a+rX /etc/my.cnf && \
      chmod 0755 /entrypoint.sh
 
 ENTRYPOINT ["/tini", "--", "/entrypoint.sh"]
-
