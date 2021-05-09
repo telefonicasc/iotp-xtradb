@@ -34,10 +34,11 @@ done
 # Now we can do the initialization.
 if [ "${MYSQL_MUST_INIT}" -eq "1" ]; then
     cat >/tmp/init_file.sql <<EOF
-SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_PASSWORD}');
+CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 CREATE USER 'sstuser'@'localhost' IDENTIFIED BY '${MYSQL_SST_PASSWORD}';
 CREATE USER 'sstuser'@'%' IDENTIFIED BY '${MYSQL_SST_PASSWORD}';
 CREATE USER 'exporter'@'localhost' IDENTIFIED BY '${MYSQL_EXPORTER_PASSWORD}' WITH MAX_USER_CONNECTIONS 3;
+GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;
 GRANT PROCESS, RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'sstuser'@'localhost';
 GRANT PROCESS, RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'sstuser'@'%';
 GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'localhost';
